@@ -29,24 +29,6 @@ app.on('ready', function() {
   // Open the DevTools.
   mainWindow.openDevTools();
 
-  var HID = require('node-hid');
-var devices = HID.devices();
-var resultObject = search(2049, devices);
-
-function search(nameKey, myArray) {
-    for (var i = 0; i < myArray.length; i++) {
-        if (myArray[i].vendorId === nameKey) {
-            return myArray[i];
-        }
-    }
-}
-
-var device = new HID.HID(resultObject.path);
-
-device.on('data', function(info){
-  console.log(info);
-});
-
   // Emitted when the window is closed.
   mainWindow.on('closed', function() {
     // Dereference the window object, usually you would store windows
