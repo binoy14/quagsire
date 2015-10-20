@@ -4,23 +4,45 @@ var fs = require('fs');
 
 if(device){
   device.on('data', function(info){
-    document.getElementById('error').style.display = 'none';
+    hideElem('#error');
     var hex = info.toString('hex');
     var cardDataHex = hex.split('');
     var finalId = getId(cardDataHex);
     if (finalId != false) {
-      document.getElementById('student-id').innerHTML = finalId;
-      fs.appendFileSync('/Users/binoy/Documents/Five_Tech/College_Projects/ACM/attendence.txt', finalId + '\n');
+      showStudentId(finalId);
+      //fs.appendFileSync('/Users/binoy/Documents/Five_Tech/College_Projects/ACM/attendence.txt', finalId + '\n');
     } else {
-      document.getElementById('error').style.display = 'block';
+      showElem('#error');
     }
   });
+
+  device.on('error', function(err){
+    if(err) throw err;
+    showElem('#error');
+    device.close();
+  });
 } else {
-  document.getElementById('error-2').style.display = 'block';
+  showElem('#error-2');
 }
 
-device.on('error', function(err){
-  if(err) throw err;
-  document.getElementById('error').style.display = 'block';
-  device.close();
-})
+/* 
+  Helper Functions
+ */ 
+
+function showElem(id){
+  $(id).removeClass('hidden').addClass('animated fadeIn');
+  $(id).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+    $(this).removeClass('animated fadeIn');
+  });
+}
+
+function hideElem(id){
+  $(id).addClass('animated fadeOut'); 
+  $(id).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+    $(this).removeClass('animated fadeOut').addClass('hidden');
+  });
+}
+
+function showStudentId(id){
+  $('#student-id').html(id);
+}
