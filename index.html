@@ -1,14 +1,70 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>NJIT ACM Swipe System</title>
-  </head>
-  <body>
-    <h1>NJIT ACM Swipe System</h1>
-    <div style="display : inline-block"> Student Id : <div style="display : inherit" id="student-id"></div></div>
 
-    <div style="color : red; display : none" id="error">Please swipe again</div>
-    <div style="color : red; display : none" id="error-2">Please connect card reader</div>
-  </body>
-  <script src="device.js"></script>
+<head>
+    <title>NJIT ACM Swipe System</title>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="bower_components/animate.css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>NJIT ACM Swipe System</h1>
+            <span>Please swipe you're NJIT Student Id</span>
+            <!-- Errors -->
+            <div class="alert alert-danger hidden" id="error">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span> Please swipe again
+            </div>
+            <div class="alert alert-danger hidden" id="error-2">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span> Please connect card reader
+            </div>
+            <!-- ./Error -->
+            <h3>Student Id : <span id="student-id"></span></h3>
+            <div class="alert alert-success hidden" id="success">
+                <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                <span class="sr-only">Success:</span> You have successfully signed in. Next!
+            </div>
+        </div>
+        <form id="info-form" method="POST" class="form-horizontal hidden">
+            <span>All Fields Are Required</span>
+            <div class="form-group">
+                <label for="ucid" class="col-sm-3 control-label">UCID (Not Student ID)</label>
+                <div class="col-sm-9">
+                    <input type="text" required class="form-control" id="ucid" placeholder="UCID">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="first-name" class="col-sm-3 control-label">First Name</label>
+                <div class="col-sm-9">
+                    <input type="text" required class="form-control" id="first-name" placeholder="First Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="name" class="col-sm-3 control-label">Last Name</label>
+                <div class="col-sm-9">
+                    <input type="text" required class="form-control" id="name" placeholder="Name">
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-10">
+                    <button type="submit" class="btn btn-default">Sign Up</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+<!-- Scripts -->
+<script src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript">
+if (typeof jQuery === 'undefined') {
+    document.write('<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"><\/script>');
+}
+</script>
+<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="device.js"></script>
+
 </html>

@@ -1,0 +1,25 @@
+{
+  "name": "electron-proto",
+  "version": "0.0.1",
+  "homepage": "https://github.com/binoy14/electron-usb-card-reader",
+  "authors": [
+    "Binoy Patel <binoypatel14@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": "~1.11.2",
+    "bootstrap": "~3.3.5",
+    "animate.css": "~3.4.0"    
+  }
+}

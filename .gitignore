@@ -1,3 +1,5 @@
 node_modules/electron-prebuilt
 node_modules/electron-rebuild
 node_modules/.bin
+bower_components
+Swipie-*-*
