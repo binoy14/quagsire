@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>NJIT ACM Swipe System</title>
+    <title>Quagsire</title>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="bower_components/animate.css/animate.min.css">
     <link rel="stylesheet" type="text/css" href="css/style.css">
@@ -26,32 +26,33 @@
             <h3>Student Id : <span id="student-id"></span></h3>
             <div class="alert alert-success hidden" id="success">
                 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                <span class="sr-only">Success:</span> You have successfully signed in. Next!
+                <span class="sr-only">Success:</span> <span id="signed-name"></span>, thanks for signing in!
             </div>
         </div>
-        <form id="info-form" method="POST" class="form-horizontal hidden">
+
+        <form id="info-form" class="form-horizontal hidden">
             <span>All Fields Are Required</span>
             <div class="form-group">
                 <label for="ucid" class="col-sm-3 control-label">UCID (Not Student ID)</label>
                 <div class="col-sm-9">
-                    <input type="text" required class="form-control" id="ucid" placeholder="UCID">
+                    <input type="text" required class="form-control" name="ucid" id="ucid" placeholder="UCID">
                 </div>
             </div>
             <div class="form-group">
                 <label for="first-name" class="col-sm-3 control-label">First Name</label>
                 <div class="col-sm-9">
-                    <input type="text" required class="form-control" id="first-name" placeholder="First Name">
+                    <input type="text" required class="form-control" name="first-name" id="first-name" placeholder="First Name">
                 </div>
             </div>
             <div class="form-group">
-                <label for="name" class="col-sm-3 control-label">Last Name</label>
+                <label for="last-name" class="col-sm-3 control-label">Last Name</label>
                 <div class="col-sm-9">
-                    <input type="text" required class="form-control" id="name" placeholder="Name">
+                    <input type="text" required class="form-control" name="last-name" id="last-name" placeholder="Last Name">
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-sm-offset-3 col-sm-10">
-                    <button type="submit" class="btn btn-default">Sign Up</button>
+                    <button id="submit" class="btn btn-default">Sign Up</button>
                 </div>
             </div>
         </form>
@@ -65,6 +66,7 @@ if (typeof jQuery === 'undefined') {
 }
 </script>
 <script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script type="text/javascript" src="bower_components/jquery-validation/dist/jquery.validate.min.js"></script>
 <script src="device.js"></script>
 
 </html>

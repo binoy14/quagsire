@@ -2,5 +2,7 @@ node_modules/electron-prebuilt
 node_modules/electron-rebuild
 node_modules/.bin
 node_modules/firebase
+node_modules/lodash
+node_modules/moment
 bower_components
 Swipie-*-*

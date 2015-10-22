@@ -1,6 +1,8 @@
-module.exports = function (cardData) {
+module.exports = function (num) {
+    var hex = num.toString('hex');
+    var cardDataHex = hex.split('');
     var regex = /([1-9][0-9]+)/;
-    var rawId = cardData.splice(234, 52);
+    var rawId = cardDataHex.splice(234, 52);
     var stringId = '';
     rawId = rawId.join('');
     for (var i = 0; i < rawId.length; i += 2) {
