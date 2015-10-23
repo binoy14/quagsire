@@ -21,6 +21,7 @@
     "jquery": "~1.11.2",
     "bootstrap": "~3.3.5",
     "animate.css": "~3.4.0",
-    "jquery-validation": "jquery-validate#~1.14.0"
+    "jquery-validation": "jquery-validate#~1.14.0",
+    "bootstrap-select": "~1.7.4"
   }
 }

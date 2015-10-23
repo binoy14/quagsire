@@ -1,26 +1,35 @@
 var device = require('./helpers/findDevice');
 var getId = require('./helpers/getId');
 var moment = require('moment');
+var config = require('./config');
 var _ = require('lodash');
 
 // Firebase
 var Firebase = require('firebase');
-var rootRef = new Firebase('https://api-demo.firebaseio.com/');
+var rootRef = new Firebase(config.firebaseUrl);
+rootRef.authWithCustomToken(config.firebaseSecret, function(err, authData) {
+  if (err) {
+    alert("Error with authentication");
+    throw err;
+  } else {
+    console.log("Login succeeded!", authData);
+  }
+});
+
 var membersRef = rootRef.child('members');
-var newDate = new Date("11-23-2015");
 var date = moment().format("MM-DD-YYYY");
 var meetingRef = rootRef.child('meetings').child(date);
 var finalId;
 
-if(device){
-  device.on('data', function(num){
+if (device) {
+  device.on('data', function(num) {
     finalId = getId(num);
     var name;
     if (finalId != false) {
       hideElem('#error');
       hideElem('#success');
-      membersRef.child(finalId).on('value', function(snap){
-        if(!snap.val()){
+      membersRef.child(finalId).on('value', function(snap) {
+        if (!snap.val()) {
           showElem('#info-form');
         } else {
           name = snap.val().firstName + ' ' + snap.val().lastName;
@@ -36,8 +45,8 @@ if(device){
     }
   });
 
-  device.on('error', function(err){
-    if(err) throw err;
+  device.on('error', function(err) {
+    if (err) throw err;
     showElem('#error');
     device.close();
   });
@@ -47,57 +56,76 @@ if(device){
 
 /* 
   Helper Functions
- */ 
+ */
 
-function showElem(id){
+$('.selectpicker').selectpicker();
+
+function showElem(id) {
   $(id).removeClass('hidden').addClass('animated fadeIn');
-  $(id).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+  $(id).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
     $(this).removeClass('animated fadeIn');
   });
 }
 
-function hideElem(id){
-  $(id).addClass('animated fadeOut'); 
-  $(id).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+function hideElem(id) {
+  $(id).addClass('animated fadeOut');
+  $(id).one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function() {
     $(this).removeClass('animated fadeOut').addClass('hidden');
   });
 }
 
-function showStudentId(id){
+function showStudentId(id) {
   $('#student-id').html(id);
 }
 
-function showSuccessfullMessage(name){
+function showSuccessfullMessage(name) {
   $('#signed-name').html(name);
   showElem('#success');
 }
 
-$.validator.addMethod('ucid', function(value, element){
+$.validator.addMethod('ucid', function(value, element) {
   return /^[a-z].+\d$/ig.test(value);
 }, 'Please enter a valid UCID');
 
 
 $('#info-form').validate({
-    rules : {
-      ucid : "required ucid",
-      firstName : "required",
-      lastName : "required"
-    },
-  });
+  rules: {
+    ucid: "required ucid",
+    firstName: "required",
+    lastName: "required",
+    major: "required",
+    standing: "required"
+  },
+  ignore: ':not(select:hidden, input:visible, textarea:visible)',
+  errorPlacement: function(error, element) {
+    if (element.hasClass('selectpicker')) {
+      error.insertAfter('.bootstrap-select');
+    } else {
+      error.insertAfter(element);
+    }
+  },
+  messages: {
+    'standing': "Please select class standing"
+  }
+});
 
-$('#info-form').submit(function(e){
+$('#info-form').submit(function(e) {
   e.preventDefault();
-  if($(this).valid()){
+  if ($(this).valid()) {
     var ucid = $('#ucid').val();
     var firstName = $('#first-name').val();
     var lastName = $('#last-name').val();
+    var major = $('#major').val();
+    var standing = $('#standing').val();
     var email = ucid + '@njit.edu';
 
     membersRef.child(finalId).set({
-      ucid : ucid,
-      email : email,
-      firstName : firstName,
-      lastName : lastName
+      ucid: ucid,
+      email: email,
+      firstName: firstName,
+      lastName: lastName,
+      stading: standing,
+      major: major
     });
     hideElem('#info-form');
   }
