@@ -124,7 +124,7 @@ $('#info-form').submit(function(e) {
       email: email,
       firstName: firstName,
       lastName: lastName,
-      stading: standing,
+      standing: standing,
       major: major
     });
     hideElem('#info-form');
