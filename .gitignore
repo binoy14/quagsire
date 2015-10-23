@@ -7,3 +7,4 @@ node_modules/moment
 bower_components
 Quagsire-*-*
 config.js
+*.log

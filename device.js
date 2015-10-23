@@ -109,6 +109,19 @@ $('#info-form').validate({
   }
 });
 
+var onComplete = function(err){
+  if(err){
+    throw err;
+    alert('Please swipe again');
+  } else {
+    $('#ucid').val('');
+    $('#first-name').val('');
+    $('#last-name').val('');
+    $('#major').val('');
+    $('#standing').val('');
+  }
+};
+
 $('#info-form').submit(function(e) {
   e.preventDefault();
   if ($(this).valid()) {
@@ -126,7 +139,7 @@ $('#info-form').submit(function(e) {
       lastName: lastName,
       standing: standing,
       major: major
-    });
+    }, onComplete);
     hideElem('#info-form');
   }
 });

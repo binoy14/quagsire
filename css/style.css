@@ -1,3 +1,7 @@
+body, .jumbotron {
+  background-color: #ACD6EC;
+}
+
 .hidden {
 	display: none;
 }
